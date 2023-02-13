@@ -1,3 +1,8 @@
+const openModalButton = document.querySelector(".open-modal");
+const closeModalButton = document.querySelector(".close-modal");
+const form1 = document.querySelector("form");
+const modal = document.querySelector(".modal");
+
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -12,12 +17,24 @@ function Book(title, author, pages, read) {
   };
 }
 
-function addBookToLibrary(book) {
+function addBookToLibrary(event) {
+  const formData = new FormData(event.target);
+  const formProps = Object.fromEntries(formData);
+
+  const book = new Book(
+    formProps.title,
+    formProps.author,
+    formProps.pages,
+    formProps.read
+  );
+
   myLibrary.push(book);
+  displayBooks();
 }
 
 function displayBooks() {
-  const main = document.querySelector("body");
+  const main = document.querySelector("main");
+  main.replaceChildren();
 
   for (let i = 0; i < myLibrary.length; i++) {
     const card = document.createElement("article");
@@ -52,4 +69,20 @@ function displayBooks() {
   }
 }
 
-displayBooks();
+function openModal() {
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  modal.style.display = "none";
+}
+
+openModalButton.addEventListener("click", openModal);
+
+closeModalButton.addEventListener("click", closeModal);
+
+form1.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addBookToLibrary(e);
+  closeModal();
+});

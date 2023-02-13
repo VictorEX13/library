@@ -9,6 +9,36 @@
     <script src="/scripts/script.js" defer></script>
 </head>
 <body>
+    <div class="form-container">
+        <button type="button" class="open-modal black-button">NEW BOOK</button>
 
+        <div class="modal">
+            <form action="./index.html" method="post">
+                <fieldset>
+                    <legend>Book data</legend>
+
+                        <label for="title">Title:</label>
+                        <input type="text" name="title" id="title">
+
+                        <label for="author">Author:</label>
+                        <input type="text" name="author" id="author">
+
+                        <label for="pages">Pages</label>
+                        <input type="number" name="pages" id="pages">
+
+                    <div>
+                        <label for="read">Have you read it?</label>
+                        <input type="checkbox" name="read" id="read" value="true">
+                    </div>
+                </fieldset>
+                <div>
+                    <button type="submit" class="new-book black-button">Add</button>
+                    <button type="button" class="close-modal black-button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <main></main>
 </body>
 </html>
