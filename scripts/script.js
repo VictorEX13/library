@@ -32,20 +32,33 @@ function addBookToLibrary(event) {
   displayBooks();
 }
 
+function removeBook(index) {
+  myLibrary.splice(index, 1);
+  displayBooks();
+}
+
 function displayBooks() {
   const main = document.querySelector("main");
   main.replaceChildren();
 
   for (let i = 0; i < myLibrary.length; i++) {
     const card = document.createElement("article");
+    card.setAttribute("data-index", i);
+
     const bookData = document.createElement("div");
+    bookData.setAttribute("class", "book-data");
+    const cardButtons = document.createElement("div");
+    cardButtons.setAttribute("class", "card-buttons");
     const title = document.createElement("p");
     const author = document.createElement("p");
     const info = document.createElement("p");
+    const removeButton = document.createElement("button");
+    removeButton.setAttribute("class", "remove-button");
 
     title.textContent = "Title: ";
     author.textContent = "Author: ";
     info.textContent = "Info: ";
+    removeButton.textContent = "Remove";
 
     const titleContent = document.createElement("span");
     const authorContent = document.createElement("span");
@@ -61,10 +74,19 @@ function displayBooks() {
     author.appendChild(authorContent);
     info.appendChild(infoContent);
 
+    removeButton.addEventListener("click", () => {
+      const index = card.getAttribute(`data-index`);
+      removeBook(index);
+    });
+
     bookData.appendChild(title);
     bookData.appendChild(author);
     bookData.appendChild(info);
+    cardButtons.appendChild(removeButton);
+
     card.appendChild(bookData);
+    card.appendChild(cardButtons);
+
     main.appendChild(card);
   }
 }
