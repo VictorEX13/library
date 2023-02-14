@@ -79,6 +79,7 @@ article div {
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
+    gap: 10px;
 }
 
 form {
@@ -101,6 +102,7 @@ fieldset {
 button {
     border-radius: 5px;
     padding: 5px 20px;
+    min-width: 90px;
 }
 
 /* Modifiers */
@@ -111,8 +113,57 @@ button {
     background-color: black;
 }
 
+.black-button:hover {
+    border-color: gray;
+    background-color: gray;
+}
+
+.black-button:active {
+    background-color: white;
+    color: black;
+}
+
 .remove-button {
     border: 1px solid rgb(238, 74, 74);
-    color: black;
     background-color: rgb(238, 74, 74);
+}
+
+.remove-button:hover {
+    border-color: rgb(236, 115, 115);;
+    background-color: rgb(236, 115, 115);
+}
+
+.remove-button:active {
+    border-color: rgb(135, 1, 1);
+    background-color: rgb(135, 1, 1);
+}
+
+.read-button {
+    border: 1px solid rgb(125, 125, 125);
+    background-color: rgb(125, 125, 125);
+}
+
+.read-button:hover {
+    border-color: rgb(198, 198, 198);
+    background-color: rgb(198, 198, 198);
+}
+
+.read-button:active {
+    border-color: rgb(95, 95, 95);
+    background-color: rgb(95, 95, 95);
+}
+
+button[already-read] {
+    border: 1px solid rgb(110, 110, 255);
+    background-color: rgb(110, 110, 255);
+}
+
+button[already-read]:hover {
+    border-color: rgb(138, 138, 211);
+    background-color: rgb(138, 138, 211);
+}
+
+button[already-read]:active {
+    border-color: rgb(10, 10, 144);
+    background-color: rgb(10, 10, 144);
 }

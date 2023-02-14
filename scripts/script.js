@@ -10,12 +10,15 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.info = function () {
-    return `${title} by ${author}, ${pages} pages, ${
-      read ? "already read" : "not read yet"
-    }`;
-  };
 }
+
+Book.prototype.readTheBook = function () {
+  if (this.read) {
+    this.read = false;
+  } else {
+    this.read = true;
+  }
+};
 
 function addBookToLibrary(event) {
   const formData = new FormData(event.target);
@@ -25,7 +28,7 @@ function addBookToLibrary(event) {
     formProps.title,
     formProps.author,
     formProps.pages,
-    formProps.read
+    !!formProps.read
   );
 
   myLibrary.push(book);
@@ -54,11 +57,18 @@ function displayBooks() {
     const info = document.createElement("p");
     const removeButton = document.createElement("button");
     removeButton.setAttribute("class", "remove-button");
+    const readButton = document.createElement("button");
+    readButton.setAttribute("class", "read-button");
+
+    if (myLibrary[i].read) {
+      readButton.toggleAttribute("already-read");
+    }
 
     title.textContent = "Title: ";
     author.textContent = "Author: ";
     info.textContent = "Info: ";
     removeButton.textContent = "Remove";
+    readButton.textContent = "Read";
 
     const titleContent = document.createElement("span");
     const authorContent = document.createElement("span");
@@ -79,10 +89,17 @@ function displayBooks() {
       removeBook(index);
     });
 
+    readButton.addEventListener("click", () => {
+      const index = card.getAttribute("data-index");
+      myLibrary[index].readTheBook();
+      readButton.toggleAttribute("already-read");
+    });
+
     bookData.appendChild(title);
     bookData.appendChild(author);
     bookData.appendChild(info);
     cardButtons.appendChild(removeButton);
+    cardButtons.appendChild(readButton);
 
     card.appendChild(bookData);
     card.appendChild(cardButtons);
