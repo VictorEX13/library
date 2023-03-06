@@ -5,20 +5,29 @@ const modal = document.querySelector(".modal");
 
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
+/* function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
-}
+} */
 
-Book.prototype.readTheBook = function () {
-  if (this.read) {
-    this.read = false;
-  } else {
-    this.read = true;
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
   }
-};
+
+  readTheBook = () => {
+    if (this.read) {
+      this.read = false;
+    } else {
+      this.read = true;
+    }
+  };
+}
 
 function addBookToLibrary(event) {
   const formData = new FormData(event.target);
