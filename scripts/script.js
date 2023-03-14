@@ -2,6 +2,9 @@ const openModalButton = document.querySelector(".open-modal");
 const closeModalButton = document.querySelector(".close-modal");
 const form1 = document.querySelector("form");
 const modal = document.querySelector(".modal");
+const title = document.querySelector("#title");
+const author = document.querySelector("#author");
+const pages = document.querySelector("#pages");
 
 let myLibrary = [];
 
@@ -129,8 +132,36 @@ openModalButton.addEventListener("click", openModal);
 
 closeModalButton.addEventListener("click", closeModal);
 
+title.addEventListener("input", (e) => {
+  if (title.validity.tooShort) {
+    title.setCustomValidity("Titles should have 5 characters minimum!");
+  } else {
+    title.setCustomValidity("");
+  }
+});
+
+author.addEventListener("input", (e) => {
+  if (author.validity.tooShort) {
+    author.setCustomValidity("Authors names should have 5 characters minimum!");
+  } else {
+    author.setCustomValidity("");
+  }
+});
+
+pages.addEventListener("input", (e) => {
+  if (pages.validity.rangeUnderflow) {
+    pages.setCustomValidity("The book must be at least 10 pages!");
+  } else if (pages.validity.rangeOverflow) {
+    pages.setCustomValidity("The book should not be more than 1000 pages!");
+  } else {
+    pages.setCustomValidity("");
+  }
+});
+
 form1.addEventListener("submit", (e) => {
-  e.preventDefault();
-  addBookToLibrary(e);
-  closeModal();
+  if (title.validity.valid || author.validity.valid || pages.validity.valid) {
+    addBookToLibrary(e);
+    closeModal();
+    e.preventDefault();
+  }
 });
